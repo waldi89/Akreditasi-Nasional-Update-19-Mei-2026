@@ -14,80 +14,100 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; }
+        
         /* Custom scrollbar for table */
         .table-container::-webkit-scrollbar { height: 8px; width: 8px; }
         .table-container::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
         .table-container::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
         .table-container::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        th { cursor: pointer; transition: background-color 0.2s; }
+        th:hover { background-color: #f8fafc; }
     </style>
 </head>
 <body class="min-h-screen bg-slate-50 text-slate-800 pb-10">
 
-    <!-- Header -->
-    <header class="bg-emerald-800 text-white shadow-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div class="flex items-center space-x-4">
-                <div class="bg-white p-2 rounded-lg">
+    <header class="bg-emerald-800 text-white shadow-md sticky top-0 z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0 sm:space-x-4">
+                <div class="bg-white p-2 rounded-lg hidden sm:block">
                     <i data-lucide="shield-check" class="w-8 h-8 text-emerald-800"></i>
                 </div>
                 <div>
-                    <h1 class="text-2xl font-bold">Daftar Akreditasi Program Studi</h1>
-                    <p class="text-emerald-100 text-sm mt-1">Universitas Andalas - Data Update: 05 Oktober 2026</p>
+                    <h1 class="text-xl sm:text-2xl font-bold flex items-center gap-2">
+                        <i data-lucide="shield-check" class="w-6 h-6 sm:hidden"></i>
+                        Daftar Akreditasi Program Studi
+                    </h1>
+                    <p class="text-emerald-100 text-xs sm:text-sm mt-1">Universitas Andalas - Data Update: 05 Oktober 2026</p>
                 </div>
             </div>
         </div>
     </header>
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <!-- Data Table Section -->
-        <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
-            <div class="p-6 border-b border-slate-100">
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="p-4 sm:p-6 border-b border-slate-100 bg-slate-50/50">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <!-- Filter -->
+                    <!-- Filter Jenjang -->
                     <div class="relative">
-                        <i data-lucide="filter" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4"></i>
-                        <select id="filterSelect" class="pl-9 pr-8 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 appearance-none bg-white cursor-pointer w-full">
+                        <i data-lucide="filter" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4 pointer-events-none"></i>
+                        <select id="filterSelect" class="pl-9 pr-8 py-2.5 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 appearance-none bg-white cursor-pointer w-full transition-all shadow-sm hover:border-slate-300">
                             <option value="All">Semua Jenjang</option>
                         </select>
+                        <i data-lucide="chevron-down" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4 pointer-events-none"></i>
                     </div>
 
                     <!-- Filter Peringkat -->
                     <div class="relative">
-                        <i data-lucide="award" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4"></i>
-                        <select id="filterPeringkat" class="pl-9 pr-8 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 appearance-none bg-white cursor-pointer w-full">
+                        <i data-lucide="award" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4 pointer-events-none"></i>
+                        <select id="filterPeringkat" class="pl-9 pr-8 py-2.5 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 appearance-none bg-white cursor-pointer w-full transition-all shadow-sm hover:border-slate-300">
                             <option value="All">Semua Peringkat</option>
                         </select>
+                        <i data-lucide="chevron-down" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4 pointer-events-none"></i>
                     </div>
 
                     <!-- Filter Lembaga -->
                     <div class="relative">
-                        <i data-lucide="building" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4"></i>
-                        <select id="filterLembaga" class="pl-9 pr-8 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 appearance-none bg-white cursor-pointer w-full">
+                        <i data-lucide="building" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4 pointer-events-none"></i>
+                        <select id="filterLembaga" class="pl-9 pr-8 py-2.5 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 appearance-none bg-white cursor-pointer w-full transition-all shadow-sm hover:border-slate-300">
                             <option value="All">Semua Lembaga</option>
                         </select>
+                        <i data-lucide="chevron-down" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4 pointer-events-none"></i>
                     </div>
 
                     <!-- Search -->
                     <div class="relative">
-                        <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4"></i>
-                        <input type="text" id="searchInput" placeholder="Cari prodi atau kode..." class="pl-9 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 w-full" />
+                        <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4 pointer-events-none"></i>
+                        <input type="text" id="searchInput" placeholder="Cari prodi atau kode..." class="pl-9 pr-4 py-2.5 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 w-full transition-all shadow-sm hover:border-slate-300 placeholder:text-slate-400" />
                     </div>
                 </div>
             </div>
 
             <div class="overflow-x-auto min-h-[500px] table-container relative">
-                <table class="w-full text-left border-collapse table-fixed">
-                    <thead class="bg-slate-50 sticky top-0 z-10 shadow-sm">
+                <table class="w-full text-left border-collapse table-fixed min-w-[1000px]">
+                    <thead class="bg-slate-100 sticky top-0 z-10 shadow-sm border-b border-slate-200">
                         <tr>
-                            <th class="px-3 py-3 w-12 text-xs font-semibold text-slate-500 uppercase tracking-wider">No.</th>
-                            <th class="px-3 py-3 w-20 text-xs font-semibold text-slate-500 uppercase tracking-wider">Kode</th>
-                            <th class="px-3 py-3 w-48 text-xs font-semibold text-slate-500 uppercase tracking-wider">Program Studi</th>
-                            <th class="px-3 py-3 w-20 text-xs font-semibold text-slate-500 uppercase tracking-wider">Jenjang</th>
-                            <th class="px-3 py-3 w-24 text-xs font-semibold text-slate-500 uppercase tracking-wider">Peringkat</th>
-                            <th class="px-3 py-3 w-48 text-xs font-semibold text-slate-500 uppercase tracking-wider">No. SK</th>
-                            <th class="px-3 py-3 w-24 text-xs font-semibold text-slate-500 uppercase tracking-wider">Lembaga</th>
-                            <th class="px-3 py-3 w-32 text-xs font-semibold text-slate-500 uppercase tracking-wider">Masa Berlaku</th>
-                            <th class="px-3 py-3 w-24 text-xs font-semibold text-slate-500 uppercase tracking-wider text-center">Sertifikat</th>
+                            <th class="px-4 py-3 w-16 text-xs font-bold text-slate-600 uppercase tracking-wider group" onclick="sortBy('nomor')">
+                                <div class="flex items-center gap-1">No <i data-lucide="arrow-up-down" class="w-3 h-3 text-slate-400 group-hover:text-emerald-600"></i></div>
+                            </th>
+                            <th class="px-4 py-3 w-24 text-xs font-bold text-slate-600 uppercase tracking-wider group" onclick="sortBy('kode')">
+                                <div class="flex items-center gap-1">Kode <i data-lucide="arrow-up-down" class="w-3 h-3 text-slate-400 group-hover:text-emerald-600"></i></div>
+                            </th>
+                            <th class="px-4 py-3 w-56 text-xs font-bold text-slate-600 uppercase tracking-wider group" onclick="sortBy('nama')">
+                                <div class="flex items-center gap-1">Program Studi <i data-lucide="arrow-up-down" class="w-3 h-3 text-slate-400 group-hover:text-emerald-600"></i></div>
+                            </th>
+                            <th class="px-4 py-3 w-24 text-xs font-bold text-slate-600 uppercase tracking-wider group" onclick="sortBy('jenjang')">
+                                <div class="flex items-center gap-1">Jenjang <i data-lucide="arrow-up-down" class="w-3 h-3 text-slate-400 group-hover:text-emerald-600"></i></div>
+                            </th>
+                            <th class="px-4 py-3 w-32 text-xs font-bold text-slate-600 uppercase tracking-wider group" onclick="sortBy('peringkat')">
+                                <div class="flex items-center gap-1">Peringkat <i data-lucide="arrow-up-down" class="w-3 h-3 text-slate-400 group-hover:text-emerald-600"></i></div>
+                            </th>
+                            <th class="px-4 py-3 w-56 text-xs font-bold text-slate-600 uppercase tracking-wider">No. SK</th>
+                            <th class="px-4 py-3 w-32 text-xs font-bold text-slate-600 uppercase tracking-wider group" onclick="sortBy('lembaga')">
+                                <div class="flex items-center gap-1">Lembaga <i data-lucide="arrow-up-down" class="w-3 h-3 text-slate-400 group-hover:text-emerald-600"></i></div>
+                            </th>
+                            <th class="px-4 py-3 w-40 text-xs font-bold text-slate-600 uppercase tracking-wider">Masa Berlaku</th>
+                            <th class="px-4 py-3 w-24 text-xs font-bold text-slate-600 uppercase tracking-wider text-center">Sertifikat</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody" class="divide-y divide-slate-100 bg-white">
@@ -95,8 +115,12 @@
                     </tbody>
                 </table>
             </div>
-            <div class="px-6 py-4 border-t border-slate-100 bg-slate-50">
-                <p id="tableInfo" class="text-xs text-slate-500">Menampilkan 0 dari 0 Program Studi</p>
+            
+            <div class="px-6 py-4 border-t border-slate-200 bg-slate-50 flex justify-between items-center">
+                <p id="tableInfo" class="text-sm font-medium text-slate-600">Menampilkan 0 dari 0 Program Studi</p>
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-xs flex items-center gap-1 text-emerald-700 hover:text-emerald-800 font-medium transition-colors">
+                    Kembali ke Atas <i data-lucide="arrow-up" class="w-3 h-3"></i>
+                </button>
             </div>
         </div>
     </main>
@@ -128,7 +152,7 @@
                 <tr><td>20</td><td>80204</td><td>Sejarah</td><td>S1</td><td>Unggul</td><td><a href="https://sapto.banpt.or.id/downloadsks/SSK-75349-3a31c3d4b93105b3677d003c73f75dde.pdf">4777/SK/BAN-PT/Ak-PNB/S/XI/2023</a></td><td>12/07/2022 – 12/07/2027</td><td>BAN-PT</td><td><a href="https://drive.google.com/file/d/19TFsZ1rko4hdSK6NbBo7gvLy2RPDhPno/view"><button class="btn success">Sertifikat</button></a></td></tr>
                 <tr><td>21</td><td>80203</td><td>Teknik Pertanian dan Biosistem</td><td>S1</td><td>A</td><td><a href="https://sapto.banpt.or.id/downloadsks/SSK-87406-c35bdb43069deb04e2599c6801b79965_sign.pdf">6978/SK/BAN-PT/Ak-PNB/S/XII/2024</a></td><td>13/06/2023 – 27/06/2028</td><td>BAN-PT</td><td><a href="https://drive.google.com/file/d/1SAZYAbC6G1_K32ByLTyjdx9Az8im3_hh/view?usp=sharing"><button class="btn success">Sertifikat</button></a></td></tr>
                 <tr><td>22</td><td>20201</td><td>Teknik Elektro</td><td>S1</td><td>Unggul</td><td><a href="https://lpm.unand.ac.id/wp-content/uploads/2025/09/SK-Akreditasi-S1-TE.pdf">0212/SK/LAM Teknik/AS/IV/2025</a></td><td>21/04/2025 – 20/04/2030</td><td>LAM-Teknik</td><td><a href="https://drive.google.com/file/d/1L60gyNps_chlezbxijstarADOdlhOfEP/view?usp=sharing"><button class="btn success">Sertifikat</button></a></td></tr>
-                <tr><td>23</td><td>54201</td><td>Agribisnis</td><td>S1</td><td>Unggul</td><td><a href="https://sapto2.banpt.or.id/histori_prodi/Akreditasi/detail?tipe=open_file&amp;file=af395574c88ea60e55984d3fc22d4b7357533cbff71aae6b777008f07c5b5753a4d9795e57b2c61b4b0bd46de785811d9a6abcf8abe007825e410e861f4541f9CqAAaIkS3dcgASpgoi4Wvug6jIA8JzpA3q5TenS_lt2p-k_Df3tX-34Bxm_6QAe0AbZGcSopgB6DTrXY1U472g&amp;kode=664a313d4354ab1fb8834cb8045862fc3b47f0d5dd52f018493e264de010c3d174fe7d9bbe1123f9aa379f200306d6226fdd556a491a5abf58658ef190b79cc20HsVI8YPJtn_Y4lW3ImsHASIrJlkNTeCbeIFQlUf-gs">6932/SK/BAN-PT/Ak.KP/S1/VII/2025</a></td><td>01/07/2025 – 02/08/2027</td><td>BAN-PT</td><td><a href="https://lpm.unand.ac.id/wp-content/uploads/2025/09/S1-AGRIBISNIS.pdf">Sertifikat</a></td></tr>
+                <tr><td>23</td><td>54201</td><td>Agribisnis</td><td>S1</td><td>Unggul</td><td><a href="#">6932/SK/BAN-PT/Ak.KP/S1/VII/2025</a></td><td>01/07/2025 – 02/08/2027</td><td>BAN-PT</td><td><a href="https://lpm.unand.ac.id/wp-content/uploads/2025/09/S1-AGRIBISNIS.pdf">Sertifikat</a></td></tr>
                 <tr><td>24</td><td>62201</td><td>Akuntansi</td><td>S1</td><td>Unggul</td><td>2692/DE/A.5/AR.10/VIII/2025</td><td>29/11/2025 - 29/11/2030</td><td>LAMEMBA</td><td><a href="https://uandalas-my.sharepoint.com/:i:/g/personal/ke_lpm_unand_ac_id/ESx8jeimSvlIhn84exOWUb8Bh7WE9sPXk0Q0idJWOUPrzg?e=C07C7z">Sertifikat</a></td></tr>
                 <tr><td>25</td><td>48201</td><td>Farmasi</td><td>S1</td><td>Unggul</td><td>0723/LAM-PTKes/Akr/Sar/VIII/2022</td><td>25/08/2022 – 25/08/2027</td><td>LAM-PTKes</td><td><a href="https://drive.google.com/file/d/1RSWgxgC5trEQWJunLvatfbTXQyH3rO9G/view?usp=share_link"><button class="btn success">Sertifikat</button></a></td></tr>
                 <tr><td>26</td><td>79204</td><td>Sastra Jepang</td><td>S1</td><td>Terakreditasi</td><td><a href="http://lpm.unand.ac.id/wp-content/uploads/2026/08/SK-Prodi-S1-Sastra-Jepang.pdf">609/SK/BAN-PT/Ak.S/2.0/S1/VIII/2026</a></td><td>13/08/2026 – 13/08/2027</td><td>BAN-PT</td><td><a href="http://lpm.unand.ac.id/wp-content/uploads/2026/08/Sertifikat-Prodi-S1-Sastra-Jepang.pdf">Sertifikat</a></td></tr>
@@ -271,13 +295,15 @@
             'Terakreditasi': '#8b5cf6', 'Terakreditasi Pertama': '#a78bfa'
         };
 
-        // Initialize variables
         let data = [];
         let filteredData = [];
         let searchTerm = '';
         let filterJenjang = 'All';
         let filterPeringkat = 'All';
         let filterLembaga = 'All';
+        
+        let sortCol = 'nomor';
+        let sortAsc = true;
 
         // Parse HTML Data
         function parseHTMLData(htmlString) {
@@ -290,14 +316,18 @@
                 const ketCell = cells[8];
                 const linkEl = ketCell ? ketCell.querySelector('a') : null;
                 
+                const skCell = cells[5];
+                const skLinkEl = skCell ? skCell.querySelector('a') : null;
+                
                 return {
                     id: index,
-                    nomor: cells[0]?.textContent?.trim() || '',
+                    nomor: parseInt(cells[0]?.textContent?.trim()) || 0,
                     kode: cells[1]?.textContent?.trim() || '',
                     nama: cells[2]?.textContent?.trim() || '',
                     jenjang: cells[3]?.textContent?.trim() || '',
                     peringkat: cells[4]?.textContent?.trim() || '',
                     sk: cells[5]?.textContent?.trim() || '',
+                    linkSK: skLinkEl ? skLinkEl.getAttribute('href') : null,
                     masa: cells[6]?.textContent?.trim() || '',
                     lembaga: cells[7]?.textContent?.trim() || '',
                     linkSertifikat: linkEl ? linkEl.getAttribute('href') : null,
@@ -305,6 +335,7 @@
             }).filter(item => item.jenjang !== 'Institusi' && item.nama !== ''); 
         }
 
+        // Helper for background color opacity
         function hexToRgba(hex, alpha) {
             let c;
             if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
@@ -321,48 +352,75 @@
         function renderTable() {
             const tbody = document.getElementById('tableBody');
             
+            // Apply sorting before rendering
+            filteredData.sort((a, b) => {
+                let valA = a[sortCol];
+                let valB = b[sortCol];
+                
+                if (typeof valA === 'string') valA = valA.toLowerCase();
+                if (typeof valB === 'string') valB = valB.toLowerCase();
+
+                if (valA < valB) return sortAsc ? -1 : 1;
+                if (valA > valB) return sortAsc ? 1 : -1;
+                return 0;
+            });
+
             if (filteredData.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="9" class="px-6 py-10 text-center text-slate-500">Data tidak ditemukan</td></tr>`;
+                tbody.innerHTML = `
+                <tr>
+                    <td colspan="9" class="px-6 py-16 text-center text-slate-500">
+                        <div class="flex flex-col items-center justify-center">
+                            <i data-lucide="file-x-2" class="w-12 h-12 text-slate-300 mb-3"></i>
+                            <p class="text-base font-medium text-slate-600">Data tidak ditemukan</p>
+                            <p class="text-sm mt-1">Coba sesuaikan kata kunci atau filter pencarian.</p>
+                        </div>
+                    </td>
+                </tr>`;
             } else {
-                tbody.innerHTML = filteredData.map(item => {
+                tbody.innerHTML = filteredData.map((item, index) => {
                     const pillColor = COLORS[item.peringkat] || '#64748b';
                     const pillBg = hexToRgba(pillColor, 0.15);
                     
                     const sertifikatHtml = item.linkSertifikat 
-                        ? `<a href="${item.linkSertifikat}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center p-2 text-emerald-600 bg-emerald-50 hover:bg-emerald-100 rounded-lg transition-colors" title="Download/Buka Sertifikat">
+                        ? `<a href="${item.linkSertifikat}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center p-2 text-emerald-600 bg-emerald-50 hover:bg-emerald-100 hover:text-emerald-700 rounded-lg transition-colors border border-emerald-100 hover:border-emerald-200 shadow-sm" title="Download/Buka Sertifikat">
                             <i data-lucide="download" class="w-4 h-4"></i>
                            </a>`
-                        : `<span class="text-slate-400 text-xs italic">-</span>`;
+                        : `<span class="text-slate-400 text-xs italic bg-slate-50 px-3 py-1.5 rounded border border-slate-100">-</span>`;
+
+                    const skHtml = item.linkSK
+                        ? `<a href="${item.linkSK}" target="_blank" rel="noopener noreferrer" class="text-emerald-600 hover:text-emerald-700 hover:underline inline-flex items-start gap-1" title="Buka Dokumen SK">
+                            <span>${item.sk}</span>
+                            <i data-lucide="external-link" class="w-3 h-3 flex-shrink-0 mt-0.5"></i>
+                           </a>`
+                        : (item.sk || '-');
 
                     return `
-                    <tr class="hover:bg-slate-50 transition-colors">
-                        <td class="px-3 py-3 text-sm font-medium text-slate-500 break-words">${item.nomor}</td>
-                        <td class="px-3 py-3 text-sm font-medium text-slate-500 break-words">${item.kode}</td>
-                        <td class="px-3 py-3 text-sm text-slate-800 font-medium break-words">${item.nama}</td>
-                        <td class="px-3 py-3 text-sm text-slate-600 break-words">${item.jenjang}</td>
-                        <td class="px-3 py-3">
-                            <span class="px-2.5 py-1 text-xs font-medium rounded-full inline-block text-center break-words" style="background-color: ${pillBg}; color: ${pillColor}">
-                                ${item.peringkat}
+                    <tr class="hover:bg-slate-50 transition-colors group">
+                        <td class="px-4 py-3.5 text-sm font-medium text-slate-500">${item.nomor}</td>
+                        <td class="px-4 py-3.5 text-sm font-medium text-slate-500"><span class="bg-slate-100 px-2 py-1 rounded text-slate-600">${item.kode || '-'}</span></td>
+                        <td class="px-4 py-3.5 text-sm text-slate-800 font-semibold group-hover:text-emerald-700 transition-colors">${item.nama}</td>
+                        <td class="px-4 py-3.5 text-sm text-slate-600">${item.jenjang}</td>
+                        <td class="px-4 py-3.5">
+                            <span class="px-3 py-1.5 text-xs font-semibold rounded-full inline-block text-center border shadow-sm" style="background-color: ${pillBg}; color: ${pillColor}; border-color: ${hexToRgba(pillColor, 0.3)}">
+                                ${item.peringkat || '-'}
                             </span>
                         </td>
-                        <td class="px-3 py-3 text-sm text-slate-500 break-all" title="${item.sk}">${item.sk || '-'}</td>
-                        <td class="px-3 py-3 text-sm text-slate-600 break-words">${item.lembaga}</td>
-                        <td class="px-3 py-3 text-sm text-slate-500 break-words">${item.masa || '-'}</td>
-                        <td class="px-3 py-3 text-sm text-center break-words">${sertifikatHtml}</td>
+                        <td class="px-4 py-3.5 text-xs text-slate-500 break-all">${skHtml}</td>
+                        <td class="px-4 py-3.5 text-sm text-slate-600 font-medium">${item.lembaga || '-'}</td>
+                        <td class="px-4 py-3.5 text-xs text-slate-500">${item.masa || '-'}</td>
+                        <td class="px-4 py-3.5 text-sm text-center">${sertifikatHtml}</td>
                     </tr>
                     `;
                 }).join('');
             }
             
             document.getElementById('tableInfo').textContent = `Menampilkan ${filteredData.length} dari ${data.length} Program Studi`;
-            
-            // Re-initialize icons after DOM update
             lucide.createIcons();
         }
 
         function applyFilters() {
             filteredData = data.filter(item => {
-                const matchSearch = item.nama.toLowerCase().includes(searchTerm.toLowerCase()) || item.kode.includes(searchTerm);
+                const matchSearch = item.nama.toLowerCase().includes(searchTerm.toLowerCase()) || String(item.kode).includes(searchTerm);
                 const matchJenjang = filterJenjang === 'All' || item.jenjang === filterJenjang;
                 const matchPeringkat = filterPeringkat === 'All' || item.peringkat === filterPeringkat;
                 const matchLembaga = filterLembaga === 'All' || item.lembaga === filterLembaga;
@@ -371,15 +429,32 @@
             renderTable();
         }
 
-        // Initialize App
+        function sortBy(column) {
+            if (sortCol === column) {
+                sortAsc = !sortAsc;
+            } else {
+                sortCol = column;
+                sortAsc = true;
+            }
+            renderTable();
+        }
+
+        // Initialize App on DOM Load
         document.addEventListener('DOMContentLoaded', () => {
             // Parse data
             data = parseHTMLData(rawHTMLData);
             filteredData = [...data];
 
-            // Setup Filter Options
+            // Setup Filter Options Dynamically
             const selectEl = document.getElementById('filterSelect');
-            const uniqueJenjang = Array.from(new Set(data.map(item => item.jenjang)));
+            const uniqueJenjang = Array.from(new Set(data.map(item => item.jenjang))).filter(j => j !== '');
+            
+            // Custom sort for Jenjang (D3, S1, S2, S3, etc)
+            const orderJenjang = ['D3', 'S1', 'S2', 'S3', 'Profesi', 'Sp-1', 'Sp-2'];
+            uniqueJenjang.sort((a, b) => {
+                return orderJenjang.indexOf(a) - orderJenjang.indexOf(b);
+            });
+
             uniqueJenjang.forEach(j => {
                 const opt = document.createElement('option');
                 opt.value = j;
@@ -405,10 +480,10 @@
                 selectLembagaEl.appendChild(opt);
             });
 
-            // Initial Render Table
+            // Initial Render
             renderTable();
 
-            // Event Listeners
+            // Event Listeners for filters
             document.getElementById('searchInput').addEventListener('input', (e) => {
                 searchTerm = e.target.value;
                 applyFilters();
